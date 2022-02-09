@@ -13,6 +13,9 @@ export default function Dashboard() {
     if (!auth && !loading) {
       router.push('/');
     }
+    if (!auth) {
+      router.push('/');
+    }
   }, [auth, loading]);
 
   const { data } = useSWR(auth ? ['/api/user', auth.token] : null, fetcher);

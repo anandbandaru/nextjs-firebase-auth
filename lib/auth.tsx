@@ -13,14 +13,14 @@ interface Auth {
 interface AuthContext {
   auth: Auth | null;
   loading: boolean;
-  signInWithTwitter: () => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
 }
 
 const authContext: Context<AuthContext> = createContext<AuthContext>({
   auth: null,
   loading: true,
-  signInWithTwitter: async () => {},
+  signInWithGoogle: async () => {},
   signOut: async () => {}
 });
 
@@ -69,7 +69,7 @@ function useProvideAuth() {
     // Format user into my required state.
     const authedUser = formatAuthState(response.user);
     // firestore database function
-    createUser(authedUser.uid as string, authedUser);
+    //createUser(authedUser.uid as string, authedUser);
   };
 
   /**
@@ -85,9 +85,9 @@ function useProvideAuth() {
    * Triggers firebase Oauth for twitter and calls signIn when successful.
    * sets loading to true.
    */
-  const signInWithTwitter = () => {
+  const signInWithGoogle = () => {
     setLoading(true);
-    return firebase.auth().signInWithPopup(new firebase.auth.TwitterAuthProvider()).then(signedIn);
+    return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(signedIn);
   };
 
   /**
@@ -110,7 +110,7 @@ function useProvideAuth() {
   return {
     auth,
     loading,
-    signInWithTwitter,
+    signInWithGoogle,
     signOut
   };
 }

@@ -3,7 +3,7 @@ import { useAuth } from '../lib/auth';
 import Link from 'next/link';
 
 export default function Home() {
-  const { auth, signOut, signInWithTwitter } = useAuth();
+  const { auth, signOut, signInWithGoogle } = useAuth();
 
   return (
     <div>
@@ -22,7 +22,7 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <button onClick={() => signInWithTwitter()}>Sign In</button>
+        <button onClick={() => signInWithGoogle()}>Sign In</button>
       )}
     </div>
   );
